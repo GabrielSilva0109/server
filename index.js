@@ -6,7 +6,7 @@ const app = express()
 app.use(express.json())
 
 // Routes
-app.use("/home", home, User)
+app.use("/", User)
 
 // connection
 const port = process.env.PORT || 9001
