@@ -1,4 +1,5 @@
 const express = require("express")
+const pool = require('./db')
 const User = require("./routes/UserRoutes")
 
 const app = express()
