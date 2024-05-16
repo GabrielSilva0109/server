@@ -1,25 +1,18 @@
-const { Pool } = require('pg')
+const mysql = require('mysql2')
 
-const host = process.env.POSTGRES_HOST
-const user = process.env.POSTGRES_USER
-const password = process.env.POSTGRES_PASSWORD
-const database = process.env.POSTGRES_DATABASE
-
-const pool = new Pool({
-    user: user,
-    host: host,
-    database: database,
-    password: password,
-    port: 5432,
-})
-
-pool.connect((err, client, release) => {
-    if (err) {
-        return console.error('Erro ao conectar com o banco de dados:', err);
-    }
-    console.log('Conexão bem-sucedida com o banco de dados');
-    release(); // Liberar o cliente para que possa ser reutilizado
+const pool = mysql.createPool({
+    host: process.env.DB_HOST, 
+    user: process.env.DB_USERNAME, 
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_DBNAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
 });
 
+pool.getConnection((err, conn) => {
+    if(err) console.log(err)
+    console.log("Connected successfully")
+})
 
-module.exports = pool
+module.exports = pool.promise()
