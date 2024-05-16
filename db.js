@@ -5,9 +5,9 @@ const userAWS = process.env.awsUSER
 const passwordAWS = process.env.awsPASSWORD
 
 const awsDB = mysql.createConnection({
-    host: hostAWS,
-    user: userAWS,
-    password: passwordAWS,
+    host: 'vertex-1.cv22i6qoivnt.us-east-2.rds.amazonaws.com',
+    user: 'admin',
+    password: 'Vertex123',
     database: "vertex"
 })
 
