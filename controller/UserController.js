@@ -1,4 +1,4 @@
-const awsDB = require('../db');
+const awsDB = require('../db')
 
 exports.getUsers = (req, res) => {
     const q = "SELECT * FROM users;"

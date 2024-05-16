@@ -1,22 +1,25 @@
-const mysql = require('mysql')
+const { Pool } = require('pg')
 
-const hostAWS = process.env.awsHOST
-const userAWS = process.env.awsUSER
-const passwordAWS = process.env.awsPASSWORD
+const host = process.env.POSTGRES_HOST
+const user = process.env.POSTGRES_USER
+const password = process.env.POSTGRES_PASSWORD
+const database = process.env.POSTGRES_DATABASE
 
-const awsDB = mysql.createConnection({
-    host: 'vertex-1.cv22i6qoivnt.us-east-2.rds.amazonaws.com',
-    user: 'admin',
-    password: 'Vertex123',
-    database: "vertex"
+const pool = new Pool({
+    user: user,
+    host: host,
+    database: database,
+    password: password,
+    port: 5432,
 })
 
-awsDB.connect((erro) => {
-    if(erro){
-        console.log("Erro Connection AWS DB", erro)
-        return
-    } 
-    console.log("AWS DB Connection Successfull!")
-})
+pool.connect((err, client, release) => {
+    if (err) {
+        return console.error('Erro ao conectar com o banco de dados:', err);
+    }
+    console.log('Conexão bem-sucedida com o banco de dados');
+    release(); // Liberar o cliente para que possa ser reutilizado
+});
 
-module.exports = awsDB
+
+module.exports = pool
