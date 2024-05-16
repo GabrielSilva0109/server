@@ -7,7 +7,6 @@ router.get("/user", async (req, res) => {
     res.send('Usuarios')
 })
 
-router.get("/users", userController.getUsers)
-
+router.get("/users" )
 
 module.exports = router
