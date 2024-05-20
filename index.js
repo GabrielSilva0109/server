@@ -4,9 +4,6 @@ require('dotenv').config()
 
 app.use(express.json())
 
-// Routes
-app.use("/api", User)
-
 app.get("/", async (req, res, next) => {
     res.send('Bem vindo ao Servidor')
 })
