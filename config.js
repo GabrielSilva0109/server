@@ -4,4 +4,6 @@ const mysql = require("mysql12")
 const urlDB = `mysql://${process.env.MYSQLUSER}:${process.env.MYSQLPASSWORD}@${process.env.MYSQLHOST}:${process.env.MYSQLDATABASE}`
 const connection = mysql.createConnection(urlDB)
 
+
+
 module.exports = connection
