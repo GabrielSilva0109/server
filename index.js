@@ -14,10 +14,12 @@ app.use(cors(corsOptions))
 const connection = require('./config')
 const userRoutes = require('./routes/UserRoutes')
 const walletRoutes = require('./routes/WalletRoutes')
+const ativosRoutes = require('./routes/AtivosRoutes')
+const despesasRoutes = require('./routes/DespesasRoutes')
 
 app.use(express.json())
 
-app.use('/api', userRoutes, walletRoutes)
+app.use('/api', userRoutes, walletRoutes, ativosRoutes, despesasRoutes)
 
 app.get("/", async (req, res, next) => {
     res.send('Bem vindo ao Servidor')
