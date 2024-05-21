@@ -28,19 +28,19 @@ const getUserById = (req, res) => {
             return res.status(404).json({ error: 'User not found' });
         }
         res.status(200).json(results[0])
-    });
-};
+    })
+}
 
 // Cria um Usuário
 const createUser = (req, res) => {
-    const { name, password, email, birth, cpf, cep } = req.body;
+    const { name, password, email, birth, cpf, cep } = req.body
 
     if (!name || !password || !email) {
-        return res.status(400).json({ error: 'Required fields are missing' });
+        return res.status(400).json({ error: 'Required fields are missing' })
     }
 
     // Aqui você pode adicionar validações adicionais, como formato de email ou CPF
-    const hashedPassword = bcrypt.hashSync(password, 10);
+    const hashedPassword = bcrypt.hashSync(password, 10)
 
     connection.query(
         "INSERT INTO users (`name`, `password`, `email`, `birth`, `cpf`, `cep`) VALUES (?, ?, ?, ?, ?, ?);",
@@ -49,9 +49,9 @@ const createUser = (req, res) => {
             if (error) {
                 // Verifica se o erro é devido a uma violação de chave única (email duplicado)
                 if (error.code === 'ER_DUP_ENTRY') {
-                    return res.status(400).json({ error: 'Email already exists' });
+                    return res.status(400).json({ error: 'Email already exists' })
                 }
-                return res.status(500).json({ error: error.message });
+                return res.status(500).json({ error: error.message })
             }
             res.status(201).json({ id: results.insertId, name, email })
         }
