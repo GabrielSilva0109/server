@@ -31,12 +31,13 @@ const getUserById = (req, res) => {
     })
 }
 
+
 // Cria um Usuário
 const createUser = (req, res) => {
-    const { name, password, email, birth, cpf, cep } = req.body
+    const { name, password, email, birth, cpf, cep } = req.body;
 
     if (!name || !password || !email) {
-        return res.status(400).json({ error: 'Required fields are missing' })
+        return res.status(400).json({ error: 'Required fields are missing' });
     }
 
     // Aqui você pode adicionar validações adicionais, como formato de email ou CPF
@@ -44,7 +45,7 @@ const createUser = (req, res) => {
 
     connection.query(
         "INSERT INTO users (`name`, `password`, `email`, `birth`, `cpf`, `cep`) VALUES (?, ?, ?, ?, ?, ?);",
-        [name, hashedPassword, email, birth || null, cpf || null, cep || null], 
+        [name, hashedPassword, email, birth || null, cpf || null, cep || null],
         (error, results) => {
             if (error) {
                 // Verifica se o erro é devido a uma violação de chave única (email duplicado)
@@ -53,7 +54,21 @@ const createUser = (req, res) => {
                 }
                 return res.status(500).json({ error: error.message })
             }
-            res.status(201).json({ id: results.insertId, name, email })
+
+            // Recupera o ID do usuário recém-criado
+            const userId = results.insertId
+
+            // Gera um número randômico de 5 caracteres para a conta
+            const contaNumber = generateRandomNumber()
+
+            // Cria uma wallet para o novo usuário
+            const walletQuery = "INSERT INTO wallets (`user_id`, `conta`, `saldo`) VALUES (?,?,?);"
+            connection.query(walletQuery, [userId, contaNumber, 0.00], (walletError, walletData) => {
+                if (walletError) {
+                    return res.status(500).json({ error: 'Erro ao criar Wallet para o Usuário' })
+                }
+                return res.status(201).json('Usuário e Wallet Criados!')
+            })
         }
     )
 }
