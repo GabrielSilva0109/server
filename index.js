@@ -1,6 +1,15 @@
 const express = require("express")
+const cors = require('cors')
 const app = express()
 require('dotenv').config()
+
+const corsOptions = {
+    origin: 'https://vertex-tecno.vercel.app', 
+    optionsSuccessStatus: 200 
+}
+
+// Use o middleware cors com as opções definidas
+app.use(cors(corsOptions))
 
 const connection = require('./config')
 const userRoutes = require('./routes/UserRoutes')

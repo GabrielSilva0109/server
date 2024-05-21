@@ -34,10 +34,10 @@ const getUserById = (req, res) => {
 
 // Cria um Usuário
 const createUser = (req, res) => {
-    const { name, password, email, birth, cpf, cep } = req.body;
+    const { name, password, email, birth, cpf, cep } = req.body
 
     if (!name || !password || !email) {
-        return res.status(400).json({ error: 'Required fields are missing' });
+        return res.status(400).json({ error: 'Required fields are missing' })
     }
 
     // Aqui você pode adicionar validações adicionais, como formato de email ou CPF
