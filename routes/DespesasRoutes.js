@@ -2,11 +2,11 @@ const express = require('express')
 const router = express.Router()
 const despesasController = require('../controller/DespesasController')
 
-router.get('/ativos', despesasController.getDespesas)
-router.get('/ativo/:id',despesasController.getDespesaById)
-router.get('/ativosWallet/:id', despesasController.getDespesasByWalletId)
-router.post('/ativo', despesasController.createDespesa)
-router.put('/ativo/:id', despesasController.updateDespesa)
-router.delete('/ativo/:id', despesasController.deleteDespesa)
+router.get('/despesas', despesasController.getDespesas)
+router.get('/despesa/:id',despesasController.getDespesaById)
+router.get('/despesasWallet/:id', despesasController.getDespesasByWalletId)
+router.post('/despesa', despesasController.createDespesa)
+router.put('/despesa/:id', despesasController.updateDespesa)
+router.delete('/despesa/:id', despesasController.deleteDespesa)
 
 module.exports = router
