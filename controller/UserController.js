@@ -1,5 +1,5 @@
-const bcrypt = require('bcrypt');
-const connection = require('../config');
+const bcrypt = require('bcrypt')
+const connection = require('../config')
 
 // Função para gerar um número aleatório
 const generateRandomNumber = () => {
