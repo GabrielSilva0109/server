@@ -20,11 +20,11 @@ const getAtivoById = async (req, res) => {
 
 // Retorna ATIVOS por ID da WALLET
 const getAtivosByWalletId = async (req, res) => {
-    const q = "SELECT * FROM ativos WHERE `wallet_id`=?";
+    const q = "SELECT * FROM ativos WHERE `wallet_id`=?"
     connection.query(q, [req.params.id], (error, data) => {
-        if(error) return res.status(500).json({error: "Erro ao trazer os Ativos dessa Wallet"});
-        return res.status(200).json(data);
-    });
+        if(error) return res.status(500).json({error: "Erro ao trazer os Ativos dessa Wallet"})
+        return res.status(200).json(data)
+    })
 }
 
 // Cria o ATIVO
@@ -79,7 +79,6 @@ const deleteAtivo = async (req, res) => {
         return res.status(200).json("Ativo Excluído!");
     })
 }
-
 
 module.exports = {
     getAtivos,
