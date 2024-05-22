@@ -7,7 +7,7 @@ const getAtivos = async (req, res) => {
         if (error) return res.status(500).json({ error: "Erro ao trazer os Ativos" });
         return res.status(200).json(data);
     });
-};
+}
 
 // Retorna ATIVO por ID
 const getAtivoById = async (req, res) => {
@@ -16,7 +16,7 @@ const getAtivoById = async (req, res) => {
         if (error) return res.status(500).json({ error: "Erro ao trazer Ativo por ID" });
         return res.status(200).json(data[0]);
     });
-};
+}
 
 // Retorna ATIVOS por ID da WALLET
 const getAtivosByWalletId = async (req, res) => {
@@ -25,20 +25,20 @@ const getAtivosByWalletId = async (req, res) => {
         if(error) return res.status(500).json({error: "Erro ao trazer os Ativos dessa Wallet"});
         return res.status(200).json(data);
     });
-};
+}
 
 // Cria o ATIVO
 const createAtivo = async (req, res) => {
-    const { wallet_id, titulo, valor, observacao, categoria, fonte, data } = req.body;
+    const { wallet_id, titulo, valor, observacao, categoria, fonte, data } = req.body
 
     if (!titulo || !valor || !wallet_id) {
-        return res.status(400).json({ error: "Campos Obrigatórios!" });
+        return res.status(400).json({ error: "Campos Obrigatórios!" })
     }
 
-    const q = "INSERT INTO ativos(`wallet_id`, `titulo`, `valor`, `observacao`, `categoria`, `fonte`, `data`) VALUES (?,?,?,?,?,?,?)";
+    const q = "INSERT INTO ativos(`wallet_id`, `titulo`, `valor`, `observacao`, `categoria`, `fonte`, `data`) VALUES (?,?,?,?,?,?,?)"
     connection.query(q, [wallet_id, titulo, valor, observacao, categoria, fonte, data], (error, data) => {
-        if (error) return res.status(500).json({ error: "Erro ao Cadastrar o Ativo" });
-        return res.status(201).json("Cadastrado Ativo!");
+        if (error) return res.status(500).json({ error: "Erro ao Cadastrar o Ativo" })
+        return res.status(201).json("Cadastrado Ativo!")
     })
 }
 
