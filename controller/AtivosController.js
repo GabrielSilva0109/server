@@ -2,11 +2,11 @@ const connection = require('../config')
 
 // Retorna todos os ATIVOS
 const getAtivos = async (req, res) => {
-    const q = "SELECT * FROM ativos;";
+    const q = "SELECT * FROM ativos;"
     connection.query(q, (error, data) => {
-        if (error) return res.status(500).json({ error: "Erro ao trazer os Ativos" });
-        return res.status(200).json(data);
-    });
+        if (error) return res.status(500).json({ error: "Erro ao trazer os Ativos" })
+        return res.status(200).json(data)
+    })
 }
 
 // Retorna ATIVO por ID
