@@ -30,14 +30,14 @@ app.get("/", async (req, res, next) => {
 const port = process.env.PORT || 9001
 
 app.listen(port, () => {
-    console.log(`Listening to port ${port}`);
+    console.log(`Listening to port ${port}`)
 
     // Tenta conectar ao banco de dados
     connection.connect((err) => {
         if (err) {
-            console.error('Erro ao conectar ao banco de dados:', err.stack);
+            console.error('Erro ao conectar ao banco de dados:', err.stack)
             return;
         }
-        console.log('Conectado ao banco de dados como id ' + connection.threadId);
-    });
+        console.log('Conectado ao banco de dados como id ' + connection.threadId)
+    })
 })
